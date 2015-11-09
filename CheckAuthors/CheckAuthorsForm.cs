@@ -42,7 +42,7 @@ namespace CheckAuthors
                 string line = sr.ReadLine();
                 while (line != null)
                 {
-                    ListViewItem item = new ListViewItem(new []
+                    ListViewItem item = new ListViewItem(new[]
                     {
                         line
                     });
@@ -63,10 +63,10 @@ namespace CheckAuthors
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                 foreach (string subfolder in Directory.EnumerateDirectories(dialog.SelectedPath))
-                 {
-                     checkAuthorsFile(subfolder + "\\AUTHORS");
-                 }
+                foreach (string subfolder in Directory.EnumerateDirectories(dialog.SelectedPath))
+                {
+                    checkAuthorsFile(subfolder + "\\AUTHORS");
+                }
             }
         }
 
@@ -80,6 +80,12 @@ namespace CheckAuthors
                 string line = sr.ReadLine();
                 while (line != null)
                 {
+                    if (line[0] != '*' || line[line.Length - 1] < 'a' || line[line.Length - 1] > 'z')
+                    {
+                        Console.WriteLine("Fail in \"" + filename + "\"");
+                        line = sr.ReadLine();
+                        continue;
+                    }
                     for (int i = 0; i < listView1.Items.Count; i++)
                         if (listView1.Items[i].Text == line.Substring(2))
                         {
