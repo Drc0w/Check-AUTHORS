@@ -98,7 +98,7 @@ namespace CheckAuthors
             }
             catch
             {
-
+                Console.WriteLine("Failed to open \"" + filename + '\"');
             }
         }
 
