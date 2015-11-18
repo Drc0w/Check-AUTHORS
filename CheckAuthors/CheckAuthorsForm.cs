@@ -29,6 +29,7 @@ namespace CheckAuthors
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == DialogResult.OK && dialog.CheckFileExists)
             {
+                listView1.Items.Clear();
                 addToList(dialog.FileName);
             }
         }
@@ -80,7 +81,7 @@ namespace CheckAuthors
                 string line = sr.ReadLine();
                 while (line != null)
                 {
-                    if (line[0] != '*' || line[line.Length - 1] < 'a' || line[line.Length - 1] > 'z')
+                    if (line.Length > 0 && line != "\n" && line != "" && line[0] != '*' || line[line.Length - 1] < 'a' || line[line.Length - 1] > 'z' || line[1] != ' ')
                     {
                         Console.WriteLine("Fail in \"" + filename + "\"");
                         line = sr.ReadLine();
@@ -96,9 +97,9 @@ namespace CheckAuthors
                 }
                 file.Close();
             }
-            catch
+            catch (Exception e)
             {
-                Console.WriteLine("Failed to open \"" + filename + '\"');
+                Console.WriteLine("Fail in \"" + filename + "\"\n");
             }
         }
 
