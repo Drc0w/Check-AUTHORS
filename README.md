@@ -25,4 +25,8 @@ When opening CheckAuthors, you have to:
 * Click on ***Select Directories*** and specify the directory of all projects.
 * Wait for the results. If there are still logins remaining in the list, they have failed their AUTHORS.
 
+### To use with cautions ###
+
+This project is efficient mainly for ACDCs as there are not much needs for AUTHORS checking.
 This project is not efficient when checking group of projects as it is not possible to give it a leader name.
+This project is very basic, it is suitable for some kind of assistants or students that want to check their AUTHORS.
