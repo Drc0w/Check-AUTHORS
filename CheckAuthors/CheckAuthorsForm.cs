@@ -73,33 +73,41 @@ namespace CheckAuthors
 
         private void checkAuthorsFile(string filename)
         {
+            FileStream file = null;
+            StreamReader sr = null;
             try
             {
-                FileStream file = new FileStream(filename, FileMode.Open);
-                StreamReader sr = new StreamReader(file);
+                file = new FileStream(filename, FileMode.Open);
+                sr = new StreamReader(file);
+                bool remove = true;
 
                 string line = sr.ReadLine();
                 while (line != null)
                 {
                     if (line.Length > 0 && line != "\n" && line != "" && line[0] != '*' || line[line.Length - 1] < 'a' || line[line.Length - 1] > 'z' || line[1] != ' ')
                     {
-                        Console.WriteLine("Fail in \"" + filename + "\"");
-                        line = sr.ReadLine();
-                        continue;
+                        remove = false;
+                        break;
                     }
+                    line = sr.ReadLine();
+                }
+                if (remove)
                     for (int i = 0; i < listView1.Items.Count; i++)
                         if (listView1.Items[i].Text == line.Substring(2))
                         {
                             listView1.Items.Remove(listView1.Items[i]);
                             break;
                         }
-                    line = sr.ReadLine();
-                }
+                sr.Close();
                 file.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Fail in \"" + filename + "\"\n");
+                if (sr != null)
+                    sr.Close();
+                if (file != null)
+                    file.Close();
+                Console.WriteLine("Error while parsing file: \"" + filename + "\":\n" + e); 
             }
         }
 
