@@ -1,6 +1,6 @@
 # Check Authors #
 
-CheckAuthors is a project written ic C#.
+CheckAuthors is a project written in C#.
 The goal of this project is to look fail AUTHORS.
 
 ### What is an AUTHORS? ##
