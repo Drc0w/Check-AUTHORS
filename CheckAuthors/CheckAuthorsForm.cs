@@ -88,8 +88,11 @@ namespace CheckAuthors
                 {
                     if (line.Length > 0 && line != "\n" && line != ""
                         && line[line.Length - 1] != '\n' && line[0] != '*'
-                        || line[line.Length - 1] < 'a'
-                        || line[line.Length - 1] > 'z' || line[1] != ' ')
+                        || ((line[line.Length - 1] < 'a'
+                        || line[line.Length - 1] > 'z')
+                        && (line[line.Length - 1] < '0'
+                        || line[line.Length - 1] > '9'))
+                        || line[1] != ' ')
                     {
                         remove = false;
                         break;
