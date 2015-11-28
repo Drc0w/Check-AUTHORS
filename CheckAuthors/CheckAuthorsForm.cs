@@ -82,24 +82,29 @@ namespace CheckAuthors
                 bool remove = true;
 
                 string line = sr.ReadLine();
-                string login = "";
+                int index = 0;
+                string[] login = new string[5];
                 while (line != null)
                 {
-                    if (line.Length > 0 && line != "\n" && line != "" && line[0] != '*' || line[line.Length - 1] < 'a' || line[line.Length - 1] > 'z' || line[1] != ' ')
+                    if (line.Length > 0 && line != "\n" && line != ""
+                        && line[line.Length - 1] != '\n' && line[0] != '*'
+                        || line[line.Length - 1] < 'a'
+                        || line[line.Length - 1] > 'z' || line[1] != ' ')
                     {
                         remove = false;
                         break;
                     }
-                    login = line;
+                    login[index++] = line;
                     line = sr.ReadLine();
                 }
                 if (remove)
                     for (int i = 0; i < listView1.Items.Count; i++)
-                        if (listView1.Items[i].Text == login.Substring(2))
-                        {
-                            listView1.Items.Remove(listView1.Items[i]);
-                            break;
-                        }
+                        for (int j = 0; j < login.Length && login[j] != null; j++)
+                            if (listView1.Items[i].Text == login[j].Substring(2))
+                            {
+                                listView1.Items.Remove(listView1.Items[i]);
+                                break;
+                            }
                 sr.Close();
                 file.Close();
             }
