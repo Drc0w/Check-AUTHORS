@@ -82,6 +82,7 @@ namespace CheckAuthors
                 bool remove = true;
 
                 string line = sr.ReadLine();
+                string login = "";
                 while (line != null)
                 {
                     if (line.Length > 0 && line != "\n" && line != "" && line[0] != '*' || line[line.Length - 1] < 'a' || line[line.Length - 1] > 'z' || line[1] != ' ')
@@ -89,11 +90,12 @@ namespace CheckAuthors
                         remove = false;
                         break;
                     }
+                    login = line;
                     line = sr.ReadLine();
                 }
                 if (remove)
                     for (int i = 0; i < listView1.Items.Count; i++)
-                        if (listView1.Items[i].Text == line.Substring(2))
+                        if (listView1.Items[i].Text == login.Substring(2))
                         {
                             listView1.Items.Remove(listView1.Items[i]);
                             break;
@@ -107,7 +109,6 @@ namespace CheckAuthors
                     sr.Close();
                 if (file != null)
                     file.Close();
-                Console.WriteLine("Error while parsing file: \"" + filename + "\":\n" + e); 
             }
         }
 
